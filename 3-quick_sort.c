@@ -24,7 +24,7 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 	for (j = low; j < high; j++)
 	{
 		/* Si l'élément est plus petit que le pivot */
-		if (array[j] < pivot)
+		if (array[j] <= pivot)
 		{
 			i++;
 			/* Swap array[i] et array[j] seulement si différents */
