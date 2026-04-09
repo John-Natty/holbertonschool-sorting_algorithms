@@ -1,59 +1,58 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - sorts a doubly linked list of integers
- * in ascending order using the Insertion sort algorithm
+ * insertion_sort_list - trie une liste doublement chaînée d'entiers
+ * en ordre croissant avec l'algorithme Insertion sort
  *
- * @list: pointer to pointer to the head of the list
+ * @list: adresse du pointeur vers le premier nœud de la liste
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	/* On utilise des pointeurs de nœuds, pas des int/temp */
-	listint_t *current, *tmp;
+	listint_t *current;
+	listint_t *tmp;
 
-	/* Vérifie que la liste existe et a au moins 2 éléments */
+	/* Vérifie que la liste existe et contient au moins 2 éléments */
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	/* On commence au 2e nœud (le 1er est déjà "trié") */
+	/* Commence au deuxième nœud, le premier étant déjà considéré trié */
 	current = (*list)->next;
 
 	/* Parcourt chaque nœud de la liste */
 	while (current != NULL)
 	{
-		/* Sauvegarde le suivant avant de potentiellement bouger current */
+		/* Sauvegarde le nœud courant avant de le déplacer si nécessaire */
 		tmp = current;
+
+		/* Sauvegarde le prochain nœud à traiter */
 		current = current->next;
 
-		/* Tant que tmp est plus petit que son prédécesseur, on swap */
+		/* Déplace tmp vers la gauche tant qu'il est plus petit que son précédent */
 		while (tmp->prev != NULL && tmp->n < tmp->prev->n)
 		{
-			/* --- Swap de tmp et tmp->prev --- */
-
-			/* Le prev de tmp récupère le next de tmp */
+			/* Relie l'ancien précédent de tmp au nœud après tmp */
 			tmp->prev->next = tmp->next;
 
-			/* Si tmp a un voisin après, son prev pointe vers l'ancien prev */
+			/* Si tmp n'est pas le dernier, met à jour le prev du nœud suivant */
 			if (tmp->next != NULL)
 				tmp->next->prev = tmp->prev;
 
-			/* tmp passe devant : son next devient son ancien prev */
+			/* Place tmp avant son ancien précédent */
 			tmp->next = tmp->prev;
 
-			/* tmp->prev devient le prev de l'ancien prev */
+			/* tmp récupère le précédent de son ancien précédent */
 			tmp->prev = tmp->prev->prev;
 
-			/* L'ancien prev (maintenant tmp->next) pointe vers tmp */
+			/* L'ancien précédent pointe maintenant vers tmp */
 			tmp->next->prev = tmp;
 
-			/* Si tmp est maintenant en tête, on met à jour *list */
+			/* Relie tmp à la partie gauche de la liste ou met tmp en tête */
 			if (tmp->prev != NULL)
 				tmp->prev->next = tmp;
 			else
 				*list = tmp;
 
-			/* Affiche la liste après chaque swap */
+			/* Affiche la liste après chaque échange */
 			print_list(*list);
 		}
 	}
