@@ -10,7 +10,6 @@
  *
  * Return: index of the pivot after partition
  */
-
 int lomuto_partition(int *array, int low, int high, size_t size)
 {
 	int pivot, temp, i, j;
@@ -59,7 +58,6 @@ int lomuto_partition(int *array, int low, int high, size_t size)
  * @high: ending index
  * @size: size of the array (for printing)
  */
-
 void quick_sort_rec(int *array, int low, int high, size_t size)
 {
 	int pivot;
@@ -78,7 +76,6 @@ void quick_sort_rec(int *array, int low, int high, size_t size)
 	}
 }
 
-
 /**
  * quick_sort - sorts an array of integers in ascending order
  * using the Quick sort algorithm with Lomuto partition scheme
@@ -86,7 +83,6 @@ void quick_sort_rec(int *array, int low, int high, size_t size)
  * @array: pointer to the array of integers
  * @size: number of elements in the array
  */
-
 void quick_sort(int *array, size_t size)
 {
 	/* Si le tableau est NULL ou a moins de 2 éléments, rien à trier */
@@ -94,5 +90,5 @@ void quick_sort(int *array, size_t size)
 		return;
 
 	/* Lance le tri récursif sur tout le tableau (index 0 à size-1) */
-	quick_sort_rec(array, 0, size - 1, size);
+	quick_sort_rec(array, 0, (int)(size - 1), size);
 }
